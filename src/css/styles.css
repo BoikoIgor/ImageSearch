@@ -51,36 +51,71 @@ img {
   padding-left: 15px;
   padding-right: 15px;
   margin: 0 auto;
+  position: absolute;
 }
-/* .section {
-  padding-top: 84px;
-  padding-bottom: 84px;
-} */
-.no-scroll {
-  overflow: hidden;
+.search-form {
+  position: absolute;
+  z-index: 3;
 }
-.grid {
+.gallery {
+  position: relative;
+  margin-top: 10vh;
+  margin-bottom: 100px;
+  height: 100%;
   width: 100%;
   display: grid;
   gap: 0.2rem;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   grid-auto-rows: 20vh;
 }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+/* .no-scroll {
+  overflow: hidden;
+} */
+/* .grid {
+  width: 100%;
+  display: grid;
+  gap: 0.2rem;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  grid-auto-rows: 20vh;
+} */
 .photo-card {
   height: 100%;
   background-color: aquamarine;
   /* width: clamp(30vw, 95%, 50vw); */
 }
-
+.decorWaves {
+  position: absolute;
+  z-index: 2;
+  transform: rotate(180deg);
+  /* transform-origin: top center; */
+}
 .waves {
   position: relative;
   width: 100%;
-  height: 10vh;
+  height: 30vh;
   margin-bottom: -7px; /*Fix for safari gap*/
-  min-height: 100px;
-  max-height: 150px;
+  min-height: 5vh;
+  max-height: 15vh;
 }
-
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .waves {
+    height: 10vh;
+    /* min-height: 6vh; */
+  }
+}
 /* .content {
   position: relative;
   height: 2vh;
@@ -115,18 +150,5 @@ img {
   }
   100% {
     transform: translate3d(85px, 0, 0);
-  }
-}
-/*Shrinking for mobile*/
-@media (max-width: 768px) {
-  .waves {
-    height: 40px;
-    min-height: 40px;
-  }
-  .content {
-    height: 30vh;
-  }
-  h1 {
-    font-size: 24px;
   }
 }

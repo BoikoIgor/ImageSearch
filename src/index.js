@@ -3,24 +3,13 @@ import './css/styles.css';
 // Імпортуємо бібліотеки
 import Notiflix from 'notiflix';
 import axios from 'axios';
-import OnlyScroll from 'only-scrollbar';
 import { getData } from './js/api';
 let page = 1;
-let per_page = 20;
+let per_page = 40;
 let searchSubmit = '';
 
-// const axios = require('axios/dist/browser/axios.cjs'); // browser
-// const axios = require('axios/dist/node/axios.cjs'); // node
-// const scroll = new OnlyScroll('.scroll-container', {
-//   damping: 0.8,
-//   eventContainer: window,
-// });
-const scroll = new OnlyScroll(document.querySelector('.scroll-container'), {
-  damping: 0.8,
-  eventContainer: window,
-});
 const searchForm = document.querySelector('#search-form');
-const imagesList = document.querySelector('.grid');
+const imagesList = document.querySelector('.gallery');
 
 const handleSubmit = e => {
   e.preventDefault();
@@ -31,36 +20,58 @@ const handleSubmit = e => {
 searchForm.addEventListener('submit', handleSubmit);
 
 const renderImages = () => {
-  const imagesList = items.map(`<div class="photo-card">
-            <img src="./images/logo.png" alt="" loading="lazy" />
+  const newImagesList = items
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => `<div class="photo-card">
+            <img src="${webformatURL}" alt="${tags}" loading="lazy" />
             <div class="info">
               <p class="info-item">
-                <b>Likes</b>
+                <b>Likes: ${likes}</b>
               </p>
               <p class="info-item">
-                <b>Views</b>
+                <b>Views: ${views}</b>
               </p>
               <p class="info-item">
-                <b>Comments</b>
+                <b>Comments: ${comments}</b>
               </p>
               <p class="info-item">
-                <b>Downloads</b>
+                <b>Downloads: ${downloads}</b>
               </p>
             </div>
-          </div>`);
+          </div>`
+    )
+    .join('');
   imagesList.innerHTML = '';
+  imagesList.insertAdjacentHTML('beforeend', newImagesList);
+  // плавне прокручування сторінки після запиту і відтворення кожної наступної групи зображень
+  const { height: cardHeight } =
+    imagesList.firstElementChild.getBoundingClientRect();
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
 };
 
 function getImages() {
   getData(searchSubmit, page, per_page)
     .then(data => {
       if (data.hits.length === 0) {
-        Notiflix.Notify.info(
+        Notiflix.Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         );
         return;
       }
-      console.log(data);
+      // загальна кількість зображень
+      totalImages = data.totalHits;
+      items = data.hits;
       // посилання на маленьке зображення для списку карток.
       webformatURL = data.hits.webformatURL;
       // посилання на велике зображення.
@@ -81,4 +92,3 @@ function getImages() {
       console.error('your error:', error);
     });
 }
-// console.log('Hi fuck');

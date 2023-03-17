@@ -7,7 +7,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import { getData } from './js/api';
 let items = [];
 let page = 1;
-let totalHits = 0;
 let per_page = 40;
 let searchSubmit = '';
 let isLoading = false;
@@ -29,8 +28,8 @@ const handleSubmit = e => {
 
 searchForm.addEventListener('submit', handleSubmit);
 
-const renderImages = () => {
-  const newImagesList = items
+const renderImages = data => {
+  const newImagesList = data.hits
     .map(
       ({
         webformatURL,
@@ -94,15 +93,15 @@ function getImages() {
       console.log(data);
       totalHits = data.totalHits;
       items = data.hits;
-      webformatURL = data.hits.webformatURL;
-      largeImageURL = data.hits.largeImageURL;
-      tags = data.hits.tags;
-      likes = data.hits.likes;
-      views = data.hits.views;
-      comments = data.hits.comments;
-      downloads = data.hits.downloads;
+      // webformatURL = data.hits.webformatURL;
+      // largeImageURL = data.hits.largeImageURL;
+      // tags = data.hits.tags;
+      // likes = data.hits.likes;
+      // views = data.hits.views;
+      // comments = data.hits.comments;
+      // downloads = data.hits.downloads;
 
-      renderImages();
+      renderImages(data);
 
       if (imagesList.children.length >= data.totalHits) {
         Notiflix.Notify.info(

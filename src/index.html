@@ -47,20 +47,35 @@
         </svg>
       </div>
       <form class="search-form" id="search-form">
-        <input
-          type="text"
-          name="searchQuery"
-          autocomplete="off"
-          placeholder="Search images in the sky..."
-        />
-        <button type="submit" class="visually-hidden">Search</button>
+        <fieldset class="fieldset-search">
+          <input
+            type="text"
+            name="searchQuery"
+            autocomplete="off"
+            placeholder="Search images in the sky..."
+          />
+          <button type="submit" class="searchbtn">
+            <svg class="icon icon-search" width="12" height="12">
+              <use href="./images/symbol-defs.svg#icon-search"></use>
+            </svg>
+          </button>
+          <div class="js-spinner-gallery spinner visually-hidden">
+            <div class="loadingio-spinner-dual-ball">
+              <div class="ldio-6pxvxwbft19">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
       </form>
     </header>
 
     <div class="container">
       <ul class="gallery"></ul>
-      <button type="button" class="load-more">Load more</button>
-    </div>
+      <!-- <button type="button" class="load-more">Load more</button>
+    </div> -->
 
     <script src="index.js" type="module"></script>
   </body>

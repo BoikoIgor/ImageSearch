@@ -96,12 +96,7 @@ const renderImages = () => {
 function getImages() {
   getData(searchSubmit, page, per_page)
     .then(data => {
-      if (data.hits.length === 0) {
-        Notiflix.Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.'
-        );
-        return;
-      }
+      // console.log(data);
       // загальна кількість зображень
       totalHits = data.totalHits;
       items = data.hits;
@@ -120,6 +115,12 @@ function getImages() {
       // кількість завантажень.
       downloads = data.hits.downloads;
       loadMore.style.display = 'none';
+      if (data.hits.length === 0) {
+        Notiflix.Notify.failure(
+          'Sorry, there are no images matching your search query. Please try again.'
+        );
+        return;
+      }
       renderImages();
       if (imagesList.children.length >= totalHits) {
         loadMore.style.display = 'none';

@@ -84,15 +84,15 @@ function getImages() {
   isLoading = true;
   getData(searchSubmit, page, per_page)
     .then(data => {
-      totalHits = data.totalHits;
-      items = data.hits;
-      webformatURL = data.hits.webformatURL;
-      largeImageURL = data.hits.largeImageURL;
-      tags = data.hits.tags;
-      likes = data.hits.likes;
-      views = data.hits.views;
-      comments = data.hits.comments;
-      downloads = data.hits.downloads;
+      const totalHits = data.totalHits;
+      const items = data.hits;
+      const webformatURL = data.hits.webformatURL;
+      const largeImageURL = data.hits.largeImageURL;
+      const tags = data.hits.tags;
+      const likes = data.hits.likes;
+      const views = data.hits.views;
+      const comments = data.hits.comments;
+      const downloads = data.hits.downloads;
 
       if (data.hits.length === 0) {
         Notiflix.Notify.failure(

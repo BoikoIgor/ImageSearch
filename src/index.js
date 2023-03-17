@@ -63,6 +63,12 @@ const renderImages = data => {
   }
   imagesList.insertAdjacentHTML('beforeend', newImagesList);
 
+  if (imagesList.children.length >= data.totalHits) {
+    Notiflix.Notify.info(
+      "We're sorry, but you've reached the end of search results."
+    );
+  }
+
   new SimpleLightbox('.photo-card a', {
     captionsData: 'alt',
     captionPosition: 'bottom',
@@ -91,8 +97,8 @@ function getImages() {
         return;
       }
       console.log(data);
-      totalHits = data.totalHits;
-      items = data.hits;
+      const totalHits = data.totalHits;
+      // items = data.hits;
       // webformatURL = data.hits.webformatURL;
       // largeImageURL = data.hits.largeImageURL;
       // tags = data.hits.tags;
@@ -103,11 +109,11 @@ function getImages() {
 
       renderImages(data);
 
-      if (imagesList.children.length >= data.totalHits) {
-        Notiflix.Notify.info(
-          "We're sorry, but you've reached the end of search results."
-        );
-      }
+      // if (imagesList.children.length >= data.totalHits) {
+      //   Notiflix.Notify.info(
+      //     "We're sorry, but you've reached the end of search results."
+      //   );
+      // }
     })
     .catch(error => {
       console.error('you get this error:', error);

@@ -103,7 +103,7 @@ function getImages() {
       console.log(data);
       totalHits = data.totalHits;
       items = data.hits;
-      webformatURL = data.hits.webformatURL;
+      webformatURL = items.webformatURL;
       largeImageURL = data.hits.largeImageURL;
       tags = data.hits.tags;
       likes = data.hits.likes;

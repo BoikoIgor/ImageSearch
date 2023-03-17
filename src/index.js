@@ -84,7 +84,7 @@ function getImages() {
   isLoading = true;
   getData(searchSubmit, page, per_page)
     .then(data => {
-      const totalHits = data.totalHits;
+      const totalHits = totalHits;
       const items = data.hits;
       const webformatURL = data.hits.webformatURL;
       const largeImageURL = data.hits.largeImageURL;

@@ -122,7 +122,7 @@ function getImages() {
         return;
       }
       renderImages();
-      if (imagesList.children.length >= totalHits) {
+      if (imagesList.children.length >= data.totalHits) {
         loadMore.style.display = 'none';
         Notiflix.Notify.failure(
           "We're sorry, but you've reached the end of search results."

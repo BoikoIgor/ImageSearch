@@ -5,7 +5,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 // import axios from 'axios';
 import { getData } from './js/api';
-let items = [];
+// let items = [];
 let page = 1;
 let per_page = 40;
 let searchSubmit = '';
@@ -23,6 +23,10 @@ const handleSubmit = e => {
   searchSubmit = value.trim();
   page = 1;
   imagesList.innerHTML = '';
+  console.log(
+    `New search query: ${searchSubmit}, page: ${page} and ${per_page}`
+  );
+  isLoading = false;
   getImages();
 };
 
@@ -62,7 +66,7 @@ const renderImages = data => {
     imagesList.innerHTML = '';
   }
   imagesList.insertAdjacentHTML('beforeend', newImagesList);
-
+  // const totalHits = data.totalHits;
   if (imagesList.children.length >= data.totalHits) {
     Notiflix.Notify.info(
       "We're sorry, but you've reached the end of search results."
@@ -88,6 +92,7 @@ const renderImages = data => {
 function getImages() {
   if (isLoading) return;
   isLoading = true;
+  console.log(`Fetching images for query: ${searchSubmit}, page: ${page}`);
   getData(searchSubmit, page, per_page)
     .then(data => {
       if (data.hits.length === 0) {
@@ -97,23 +102,9 @@ function getImages() {
         return;
       }
       console.log(data);
-      const totalHits = data.totalHits;
-      // items = data.hits;
-      // webformatURL = data.hits.webformatURL;
-      // largeImageURL = data.hits.largeImageURL;
-      // tags = data.hits.tags;
-      // likes = data.hits.likes;
-      // views = data.hits.views;
-      // comments = data.hits.comments;
-      // downloads = data.hits.downloads;
-
+      if (page === 1)
+        Notiflix.Notify.info(`Hooray! We found ${data.totalHits} images.`);
       renderImages(data);
-
-      // if (imagesList.children.length >= data.totalHits) {
-      //   Notiflix.Notify.info(
-      //     "We're sorry, but you've reached the end of search results."
-      //   );
-      // }
     })
     .catch(error => {
       console.error('you get this error:', error);

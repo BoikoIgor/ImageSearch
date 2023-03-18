@@ -54,23 +54,23 @@ img {
   padding: 0 0.5rem;
   position: absolute;
 }
-.search-form {
+.form {
   position: fixed;
   z-index: 3;
   /* padding: 0 5vw; */
   display: flex;
   width: 100%;
 }
-.search-form input {
+.form input {
   width: 80vw;
   border: unset;
   background: none;
   border-bottom: 0.05rem dotted #212121;
 }
-.search-form input:focus-visible {
+.form input:focus-visible {
   outline: none;
 }
-.search-form button {
+.form button {
   all: unset;
   cursor: pointer;
 }

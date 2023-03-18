@@ -13,6 +13,11 @@ let isLoading = false;
 
 const searchForm = document.querySelector('#search-form');
 const imagesList = document.querySelector('.gallery');
+let lightbox = new SimpleLightbox('.photo-card a', {
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});
 
 const handleSubmit = e => {
   e.preventDefault();
@@ -62,22 +67,17 @@ const renderImages = data => {
           </div>`
     )
     .join('');
+
   if (!page) {
     imagesList.innerHTML = '';
   }
   imagesList.insertAdjacentHTML('beforeend', newImagesList);
-  // const totalHits = data.totalHits;
+  lightbox.refresh();
   if (imagesList.children.length >= data.totalHits) {
     Notiflix.Notify.info(
       "We're sorry, but you've reached the end of search results."
     );
   }
-
-  new SimpleLightbox('.photo-card a', {
-    captionsData: 'alt',
-    captionPosition: 'bottom',
-    captionDelay: 250,
-  });
 
   // const { height: cardHeight } =
   //   imagesList.firstElementChild.getBoundingClientRect();

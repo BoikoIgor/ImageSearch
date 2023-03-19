@@ -92,16 +92,21 @@ img {
   }
 }
 .photo-card {
-  /* height: calc(100% - 1.5rem); */
+  /* height: 12vh; */
 }
-.photo-card:hover,
+/* .photo-card:hover,
 .photo-card:focus {
   transform: scale(1.15);
-}
+} */
 .photo-card img {
   aspect-ratio: 16 / 9;
   object-fit: cover;
   overflow: hidden;
+  transition: 0.5s ease-in-out;
+}
+.photo-card img:hover,
+.photo-card img:focus {
+  transform: scale(1.15) translate(0, -0.5rem);
 }
 .info {
   display: flex;

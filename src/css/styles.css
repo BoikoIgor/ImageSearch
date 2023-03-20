@@ -91,13 +91,6 @@ img {
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   }
 }
-.photo-card {
-  /* height: 12vh; */
-}
-/* .photo-card:hover,
-.photo-card:focus {
-  transform: scale(1.15);
-} */
 .photo-card img {
   aspect-ratio: 16 / 9;
   object-fit: cover;

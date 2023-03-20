@@ -99,7 +99,9 @@ img {
 }
 .photo-card img:hover,
 .photo-card img:focus {
-  transform: scale(1.15) translate(0, -0.5rem);
+  /* transform: scale(0.9) */
+  transition: transform 0.5s ease, box-shadow 0.2s ease;
+  border: 10px solid #fff;
 }
 .info {
   display: flex;

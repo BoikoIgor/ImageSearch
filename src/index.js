@@ -5,7 +5,6 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 // import axios from 'axios';
 import { getData } from './js/api';
-// let items = [];
 let page = 1;
 let per_page = 40;
 let searchSubmit = '';
@@ -76,7 +75,18 @@ const renderImages = data => {
     );
     return;
   }
-
+  // add observer to last image
+  const lastImage = imagesList.lastElementChild;
+  const observer = new IntersectionObserver(
+    entries => {
+      if (entries[0].isIntersecting) {
+        page += 1;
+        getImages();
+      }
+    },
+    { rootMargin: '0px 0px 300px 0px' }
+  );
+  observer.observe(lastImage);
   isLoading = false;
 };
 
@@ -99,11 +109,11 @@ const getImages = async () => {
   }
 };
 
-window.addEventListener('scroll', () => {
-  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-  if (scrollTop + clientHeight >= scrollHeight - 10) {
-    if (isLoading) return;
-    page += 1;
-    getImages();
-  }
-});
+// window.addEventListener('scroll', () => {
+//   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+//   if (scrollTop + clientHeight >= scrollHeight - 10) {
+//     if (isLoading) return;
+//     page += 1;
+//     getImages();
+//   }
+// });
